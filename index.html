@@ -45,6 +45,270 @@
         .copied .copy-btn {
             display: none;
         }
+        /* Fix for code block text color */
+        pre, pre code, .code-sample pre, .code-sample code, .installation-code pre, .installation-code code {
+            color: white !important;
+        }
+        .code-container pre, .code-container code, 
+        .code-sample pre, .code-sample code,
+        .installation-container pre, .installation-container code {
+            color: white !important;
+        }
+        .ai-response pre, .ai-response code {
+            color: white !important;
+        }
+        /* Improve contrast for code blocks in AI response section */
+        .ai-response {
+            background-color: #f5faff;
+        }
+        .ai-response pre {
+            background-color: #000000 !important;
+            color: white !important;
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .ai-response code {
+            background-color: #000000 !important;
+            color: white !important;
+            font-weight: 500;
+        }
+        /* Adjust logo layout */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        .logo-square {
+            margin-right: 0;
+        }
+        /* Update footer logo styling */
+        .footer-logo {
+            display: flex;
+            align-items: flex-start;
+        }
+        /* Fix spacing in download section */
+        .download {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            margin-top: 0;
+            background-color: #f5f7fa;
+        }
+        .download h2 {
+            margin-top: 0;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+        /* Download card styles */
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .download-option {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            min-height: 320px;
+            position: relative;
+        }
+        .download-icon {
+            margin-bottom: 20px;
+            font-size: 50px;
+            color: #0066FF;
+        }
+        .download-option h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .download-option p {
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .download-option .btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            min-width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .download-option .btn-primary {
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
+        }
+        .download-option .btn-primary:hover {
+            background-color: #0055DD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+        }
+        .download-option .btn-secondary {
+            background-color: white;
+            color: #0066FF;
+            border: 1px solid #0066FF;
+        }
+        .download-option .btn-secondary:hover {
+            background-color: rgba(0, 102, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        /* Adjust spacing between sections */
+        section {
+            padding: 40px 0;
+        }
+        #features {
+            margin-bottom: -20px;
+        }
+        .features {
+            padding-bottom: 20px;
+        }
+        /* New separate style for main-cta buttons */
+        .main-cta {
+            padding: 20px 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .main-cta .main-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .main-cta .main-btn {
+            padding: 16px 30px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 280px;
+            min-width: 280px;
+            max-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-cta .btn-primary {
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
+        }
+        .main-cta .btn-primary:hover {
+            background-color: #0055DD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+        }
+        .main-cta .btn-outline {
+            background-color: white;
+            color: #0066FF;
+            border: 1px solid #0066FF;
+        }
+        .main-cta .btn-outline:hover {
+            background-color: rgba(0, 102, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        /* Custom style for bottom CTA button */
+        .cta {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #f5f9ff;
+        }
+        .cta h2 {
+            margin-bottom: 15px;
+        }
+        .cta p {
+            margin-bottom: 30px;
+        }
+        .cta .btn-primary {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
+            transition: all 0.3s ease;
+            min-width: 220px;
+            max-width: 250px;
+        }
+        .cta .btn-primary:hover {
+            background-color: #0055DD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+        }
+        
+        /* Custom hero buttons styling */
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .hero-buttons .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-buttons .btn-primary {
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
+        }
+        .hero-buttons .btn-primary:hover {
+            background-color: #0055DD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+        }
+        .hero-buttons .btn-secondary {
+            background-color: white;
+            color: #0066FF;
+            border: 1px solid #0066FF;
+        }
+        .hero-buttons .btn-secondary:hover {
+            background-color: rgba(0, 102, 255, 0.05);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -52,8 +316,10 @@
         <div class="container">
             <div class="logo">
                 <div class="logo-square"></div>
-                <h1>XCF</h1>
-                <span class="logo-tagline">XCode MCP Server</span>
+                <div class="logo-text">
+                    <h1>XCF</h1>
+                    <span class="logo-tagline">XCode MCP Server</span>
+                </div>
             </div>
             <nav>
                 <ul>
@@ -601,10 +867,11 @@ mcp_xcf_snippet(filePath="AppDelegate.swift", startLine=10, endLine=20)</code></
             <div class="footer-content">
                 <div class="footer-logo">
                     <div class="logo-square"></div>
-                    <h3>XCF</h3>
-                    <span class="logo-tagline">XCode MCP Server</span>
-                    <p>AI-Powered Xcode Automation</p>
-                    <p>Built with 100% Swift</p>
+                    <div class="logo-text">
+                        <span class="logo-tagline" style="margin-top: 8px;">XCode MCP Server</span>
+                        <p>XCodeFreeze Automation</p>
+                        <p>by xcf.ai</p>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -628,7 +895,7 @@ mcp_xcf_snippet(filePath="AppDelegate.swift", startLine=10, endLine=20)</code></
                     <div class="footer-column">
                         <h4>Company</h4>
                         <ul>
-                            <li><a href="https://github.com/codefreezeai">CodeFreezeAI</a></li>
+                            <li><a href="https://github.com/codefreezeai/xcf">CodeFreezeAI</a></li>
                             <li><a href="https://github.com/codefreezeai/xcf/blob/main/LICENSE">License (MIT)</a></li>
                             <li><a href="mailto:info@xcf.ai">Contact</a></li>
                         </ul>
@@ -638,8 +905,8 @@ mcp_xcf_snippet(filePath="AppDelegate.swift", startLine=10, endLine=20)</code></
             <div class="footer-bottom">
                 <p>&copy; 2025 XCF.ai - All rights reserved</p>
                 <div class="social-links">
-                    <a href="https://twitter.com/codefreezeai"><i class="fab fa-twitter"></i></a>
-                    <a href="https://github.com/codefreezeai"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/superbox64"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/codefreezeai/xcf"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
