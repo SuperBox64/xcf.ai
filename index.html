@@ -322,30 +322,37 @@
             justify-content: center;
             font-weight: 600;
             font-size: 1.25rem;
-            margin-top: 25px; /* Move the circle significantly lower */
+            position: relative;
+            top: 6px; /* Fine-tuned positioning */
         }
-        /* Keep workflow step structure simple */
+        /* Perfectly align steps */
         .workflow-step {
             display: flex;
-            align-items: flex-start;
+            align-items: flex-start; /* Align to top */
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
             position: relative;
+        }
+        /* Fine-tune h3 alignment with circle */
+        .step-content h3 {
+            margin-top: 14px; /* Align with circle center */
+            margin-bottom: 10px;
         }
         /* Adjust the vertical line */
         .workflow-step:not(:last-child)::after {
             content: '';
             position: absolute;
-            top: 75px; /* Adjust based on new circle position */
+            top: 56px; /* Adjust based on circle position */
             left: 25px;
             width: 2px;
             height: calc(100% + 2rem);
             background-color: var(--mid-gray);
             z-index: -1;
         }
-        /* Remove any added margins to heading */
-        .step-content h3 {
-            margin-top: 0;
+        /* Remove the content padding */
+        .step-content {
+            align-self: flex-start;
+            padding-top: 0;
         }
     </style>
 </head>
