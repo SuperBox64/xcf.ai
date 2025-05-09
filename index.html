@@ -170,7 +170,7 @@
         }
         .download-option .btn-primary:hover {
             background-color: #0055DD;
-            transform: translateY(-2px);
+            transform: translateX(-50%);
             box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
         }
         .download-option .btn-secondary {
@@ -180,7 +180,7 @@
         }
         .download-option .btn-secondary:hover {
             background-color: rgba(0, 102, 255, 0.05);
-            transform: translateY(-2px);
+            transform: translateX(-50%);
         }
         /* Adjust spacing between sections */
         section {
@@ -308,6 +308,44 @@
         .hero-buttons .btn-secondary:hover {
             background-color: rgba(0, 102, 255, 0.05);
             transform: translateY(-2px);
+        }
+        /* Reset workflow circle styles */
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-top: 25px; /* Move the circle significantly lower */
+        }
+        /* Keep workflow step structure simple */
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+        }
+        /* Adjust the vertical line */
+        .workflow-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 75px; /* Adjust based on new circle position */
+            left: 25px;
+            width: 2px;
+            height: calc(100% + 2rem);
+            background-color: var(--mid-gray);
+            z-index: -1;
+        }
+        /* Remove any added margins to heading */
+        .step-content h3 {
+            margin-top: 0;
         }
     </style>
 </head>
