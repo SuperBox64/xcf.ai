@@ -279,11 +279,13 @@ section:last-child {
 .btn,
 .main-btn,
 .download-option .btn {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 48px !important;
+  height: 44px !important;
   padding: 0 24px !important;
+  min-width: 140px !important;
+  max-width: 200px !important;
   text-decoration: none !important;
   border: none !important;
   font-size: 16px !important;
@@ -340,11 +342,8 @@ section:last-child {
 
 .main-buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-lg);
-  max-width: 900px;
-  margin: 0 auto;
+  gap: 20px;
+  justify-content: flex-start;
 }
 
 .main-buttons i {
@@ -358,71 +357,70 @@ section:last-child {
 }
 
 @media (max-width: 768px) {
-  .main-buttons {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    padding: 0 var(--spacing-md);
-  }
-
-  .main-btn {
-    width: 100% !important;
-    height: 48px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 20px !important;
-    margin: 8px 0 !important;
-    font-size: 16px !important;
-    line-height: 1.2 !important;
-  }
-
-  /* Ensure text stays centered */
-  .btn span,
-  .main-btn span {
-    display: inline-block !important;
-    vertical-align: middle !important;
-  }
-
   .btn,
   .main-btn,
   .download-option .btn {
-    width: 100% !important;
-    height: 48px !important;
-    padding: 0 20px !important;
-    margin: 8px 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    width: auto !important;
+    min-width: 120px !important;
+    max-width: 160px !important;
+    height: 44px !important;
+    padding: 0 16px !important;
+    font-size: 15px !important;
   }
 
-  /* Ensure icon alignment on mobile */
-  .btn i,
-  .main-btn i,
-  .download-option .btn i {
-    height: 100% !important;
-    display: inline-flex !important;
+  .hero-buttons,
+  .main-buttons {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  nav ul {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  nav ul li {
+    width: auto !important;
+  }
+
+  nav ul li a {
+    width: auto !important;
+    padding: 6px 0 !important;
+    font-size: 14px !important;
+    margin: 0 0 0 -15px !important;
+    height: 32px !important;
+    display: flex !important;
     align-items: center !important;
   }
 }
 
 @media (max-width: 480px) {
-  .main-buttons {
-    gap: 12px !important;
-    margin: 15px 0 !important;
-  }
-
-  .main-btn {
-    height: 44px !important;
-    font-size: 15px !important;
-    padding: 0 16px !important;
-  }
-
   .btn,
   .main-btn,
   .download-option .btn {
-    height: 44px !important;
-    padding: 0 16px !important;
-    font-size: 15px !important;
+    min-width: 100px !important;
+    max-width: 140px !important;
+    height: 40px !important;
+    padding: 0 12px !important;
+    font-size: 14px !important;
+  }
+
+  .hero-buttons,
+  .main-buttons {
+    gap: 8px !important;
+  }
+
+  nav ul li a {
+    font-size: 13px !important;
+    height: 28px !important;
   }
 }
 
@@ -544,7 +542,7 @@ nav a:hover {
 
 .hero-buttons {
   display: flex;
-  gap: var(--spacing-md);
+  gap: 20px;
 }
 
 .hero-image {
@@ -2795,4 +2793,44 @@ pre,
   .code-container {
     margin-bottom: 25px !important;
   }
+}
+
+/* Hide duplicate buttons in the middle section */
+.hero p + .hero-buttons,
+.hero p + .main-buttons,
+p[class*="swift"] + .hero-buttons,
+p[class*="swift"] + .main-buttons,
+.hero p + .btn,
+.hero p + .main-btn,
+p[class*="swift"] + .btn,
+p[class*="swift"] + .main-btn,
+.built-with + .btn,
+.built-with + .main-btn,
+.built-with ~ .hero-buttons,
+.built-with ~ .main-buttons,
+.built-with ~ .btn,
+.built-with ~ .main-btn,
+[class*="Swift"] + .hero-buttons,
+[class*="Swift"] + .main-buttons,
+[class*="Swift"] ~ .btn,
+[class*="Swift"] ~ .main-btn {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure only top hero buttons are visible */
+.hero:first-of-type .hero-buttons,
+.hero:first-of-type .main-buttons,
+header .hero-buttons,
+header .main-buttons {
+  display: flex !important;
+  visibility: visible !important;
+  height: auto !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 } 
