@@ -294,6 +294,56 @@ xcf run</code></pre>
         </div>
     </section>
 
+    <section class="legal fade-in dark-section">
+        <div class="container">
+            <h2>Code Snippets</h2>
+            <div class="legal-content">
+                <p>XCF helps your AI assistant understand and fix code with powerful snippet extraction.</p>
+                
+                <h3>For AI Function Calls</h3>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code>To get an entire file:
+mcp_xcf_snippet(filePath="/full/path/to/file.swift", entireFile=true)
+
+For specific line ranges:
+mcp_xcf_snippet(filePath="/full/path/to/file.swift", startLine=10, endLine=20)</code></pre>
+                </div>
+                
+                <h3>For Human Commands</h3>
+                <p>XCF now supports simplified, user-friendly snippet commands:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code>To get an entire file, just use the filename:
+snippet filename.swift
+
+For specific line ranges (still available but typically not needed):
+snippet /full/path/to/file.swift 10 20</code></pre>
+                </div>
+                
+                <h3>Smart Path Resolution</h3>
+                <p>When a file isn't found at the exact path, XCF will intelligently search for it in:</p>
+                
+                <ul class="accessibility-features">
+                    <li>The current working directory</li>
+                    <li>The workspace folder specified in the environment</li>
+                    <li>Subdirectories (one level deep) in the workspace</li>
+                    <li>The current project directory</li>
+                </ul>
+                
+                <p>This means you can usually just use the filename without any path:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code>snippet Constants.swift</code></pre>
+                </div>
+                
+                <p>The simplified syntax makes code exploration much faster and more intuitive during conversations with your AI assistant.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="accessibility-note fade-in">
         <div class="container">
             <h2>Developer Productivity</h2>
