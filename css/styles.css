@@ -498,9 +498,9 @@ section h2::after {
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    background: var(--primary-color);
+    width: 8px;
+    height: 8px;
+    background: #1e50c9;
     border-radius: 50%;
 }
 
@@ -802,19 +802,22 @@ footer p {
     border-radius: 8px;
     padding: 0;
     margin: 15px 0 25px 0;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     position: relative;
     border: none !important;
+    width: auto;
+    max-width: 100%;
 }
 
 .code-block pre {
     margin: 0;
     padding: 15px 20px;
-    overflow-x: auto;
+    overflow: visible;
     background-color: #222;
     border: none !important;
     outline: none !important;
+    width: auto;
 }
 
 .code-block code {
@@ -825,6 +828,10 @@ footer p {
     display: block;
     border: none !important;
     outline: none !important;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: visible;
 }
 
 /* Make all text in code blocks light blue */
@@ -902,10 +909,16 @@ footer p {
 }
 
 .command-reference .legal-content ul.accessibility-features li::before {
-    content: "→";
+    content: "";
     position: absolute;
     left: 0;
-    color: #74b9ff;
+    color: #1e50c9;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #1e50c9;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .command-reference .legal-content ul.accessibility-features li strong {

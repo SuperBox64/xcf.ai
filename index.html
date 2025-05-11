@@ -135,12 +135,13 @@
         </div>
     </section>
 
-    <section id="setup" class="legal fade-in">
+    <section id="setup" class="legal fade-in dark-section">
         <div class="container">
             <h2>Setup Guide</h2>
             <div class="legal-content">
-                <p><strong>INSTALLATION:</strong> Getting started with XCF is simple. You can install it directly from GitHub releases.</p>
+                <p>XCF helps you get started quickly with a simple installation process.</p>
                 
+                <h3>Installation</h3>
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
                     <pre><code># Clone the repository
@@ -154,7 +155,8 @@ swift build -c release
 ln -s "$(pwd)/.build/release/xcf" /usr/local/bin/xcf</code></pre>
                 </div>
                 
-                <p><strong>PERMISSIONS:</strong> Grant XCF the permissions needed to automate Xcode:</p>
+                <h3>Permissions</h3>
+                <p>Grant XCF the permissions needed to automate Xcode:</p>
                 
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
@@ -162,7 +164,8 @@ ln -s "$(pwd)/.build/release/xcf" /usr/local/bin/xcf</code></pre>
 xcf grant</code></pre>
                 </div>
                 
-                <p><strong>FOR CURSOR USERS:</strong> Configure XCF as an MCP server by editing your <code>~/.cursor/mcp.json</code> file:</p>
+                <h3>Configuration</h3>
+                <p>Configure XCF as an MCP server by editing your configuration file:</p>
                 
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
@@ -176,7 +179,8 @@ xcf grant</code></pre>
 }</code></pre>
                 </div>
                 
-                <p><strong>FOR CLAUDE DESKTOP USERS:</strong> Add XCF to your <code>claude_desktop_config.json</code> file:</p>
+                <h3>Environment Variables</h3>
+                <p>Add XCF to your <code>claude_desktop_config.json</code> file with optional environment variables:</p>
                 
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
@@ -194,20 +198,8 @@ xcf grant</code></pre>
 }</code></pre>
                 </div>
                 
-                <p><strong>RESTART YOUR AI ASSISTANT:</strong> After configuration, restart your AI assistant application to apply the changes and begin using XCF's powerful features.</p>
-                
-                <p><strong>TROUBLESHOOTING:</strong> If you encounter any issues with XCF, try these steps:</p>
-                
-                <div class="code-block">
-                    <button class="copy-btn">Copy</button>
-                    <pre><code># 1. Quit your AI assistant
-# 2. Open Terminal
-# 3. Kill any running XCF processes `killall xcf`
-# 4. Reopen your AI assistant
-# 5. From AI: Activate XCF `use xcf`</code></pre>
-                </div>
-                
-                <p><strong>PRECISE PROJECT SELECTION:</strong> XCF allows you to select specific Xcode projects through simple commands (projects must be within your designated workspace folder for security):</p>
+                <h3>Project Selection</h3>
+                <p>XCF allows you to select specific Xcode projects through simple commands:</p>
                 
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
@@ -221,9 +213,13 @@ xcf open #
 xcf run</code></pre>
                 </div>
                 
-                <p><strong>SECURITY CONSIDERATIONS:</strong> XCF is designed with security in mind, providing workspace protection that safely works with projects in your designated workspace and boundary enforcement that automatically prevents access outside those boundaries.</p>
+                <h3>Security</h3>
+                <p>XCF is designed with security in mind:</p>
                 
-                <p>The complete installation guide and documentation are available in our GitHub repository, providing detailed instructions for every step of the setup process.</p>
+                <ul class="accessibility-features">
+                    <li><strong>Workspace Protection</strong> - Safely works with projects in your designated workspace</li>
+                    <li><strong>Boundary Enforcement</strong> - Automatically prevents access outside workspace boundaries</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -306,7 +302,7 @@ xcf run</code></pre>
                     <pre><code># To get an entire file:
 mcp_xcf_snippet(filePath="/full/path/to/file.swift", entireFile=true)
 
-For specific line ranges:
+# For specific line ranges:
 mcp_xcf_snippet(filePath="/full/path/to/file.swift", startLine=10, endLine=20)</code></pre>
                 </div>
                 
