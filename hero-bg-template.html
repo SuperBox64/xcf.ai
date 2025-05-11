@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XCodeFreeze Hero Background</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0056cc, #006eff);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 110, 255, 0.3), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0, 110, 255, 0.3), transparent 50%);
+            z-index: 1;
+        }
+        
+        .text {
+            position: relative;
+            z-index: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 15vw;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: -0.02em;
+            text-align: center;
+            text-transform: none;
+            user-select: none;
+            pointer-events: none;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="text">XCodeFreeze</div>
+</body>
+</html> 

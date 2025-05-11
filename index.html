@@ -4,994 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XCF - AI-Powered Xcode Automation</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .code-container {
-            position: relative;
-        }
-        .copy-btn {
+        .sr-only {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .checkmark {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            display: none;
-            color: #34C759; /* Apple system green color */
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
-            font-weight: bold;
-        }
-        .copied .checkmark {
-            display: inline;
-        }
-        .copied .copy-btn {
-            display: none;
-        }
-        /* Fix for code block text color */
-        pre, pre code, .code-sample pre, .code-sample code, .installation-code pre, .installation-code code {
-            color: white !important;
-        }
-        .code-container pre, .code-container code, 
-        .code-sample pre, .code-sample code,
-        .installation-container pre, .installation-container code {
-            color: white !important;
-        }
-        .ai-response pre, .ai-response code {
-            color: white !important;
-        }
-        /* Improve contrast for code blocks in AI response section */
-        .ai-response {
-            background-color: #f5faff;
-        }
-        .ai-response pre {
-            background-color: #000000 !important;
-            color: white !important;
-            padding: 1rem;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .ai-response code {
-            background-color: #000000 !important;
-            color: white !important;
-            font-weight: 500;
-        }
-        /* Adjust logo layout */
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            margin-left: 10px;
-        }
-        .logo-square {
-            margin-right: 0;
-        }
-        /* Update footer logo styling */
-        .footer-logo {
-            display: flex;
-            align-items: flex-start;
-        }
-        /* Fix spacing in download section */
-        .download {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            margin-top: 0;
-            background-color: #f5f7fa;
-        }
-        .download h2 {
-            margin-top: 0;
-            margin-bottom: 40px;
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 600;
-        }
-        /* Download card styles */
-        .download-options {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .download-option {
-            flex: 1;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 30px 20px;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            min-height: 320px;
-            position: relative;
-        }
-        .download-icon {
-            margin-bottom: 20px;
-            font-size: 50px;
-            color: #0066FF;
-        }
-        .download-option h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .download-option p {
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 25px;
-            color: #666;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .download-option .btn {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 8px;
-            min-width: 200px;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .download-option .btn-primary {
-            background-color: #0066FF;
-            color: white;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
-        }
-        .download-option .btn-primary:hover {
-            background-color: #0055DD;
-            transform: translateX(-50%);
-            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
-        }
-        .download-option .btn-secondary {
-            background-color: white;
-            color: #0066FF;
-            border: 1px solid #0066FF;
-        }
-        .download-option .btn-secondary:hover {
-            background-color: rgba(0, 102, 255, 0.05);
-            transform: translateX(-50%);
-        }
-        /* Adjust spacing between sections */
-        section {
-            padding: 40px 0;
-        }
-        #features {
-            margin-bottom: -20px;
-        }
-        .features {
-            padding-bottom: 20px;
-        }
-        /* New separate style for main-cta buttons */
-        .main-cta {
-            padding: 20px 0;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #eaeaea;
-        }
-        .main-cta .main-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .main-cta .main-btn {
-            padding: 16px 30px;
-            font-size: 18px;
-            font-weight: 500;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-            width: 280px;
-            min-width: 280px;
-            max-width: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .main-cta .btn-primary {
-            background-color: #0066FF;
-            color: white;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
-        }
-        .main-cta .btn-primary:hover {
-            background-color: #0055DD;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
-        }
-        .main-cta .btn-outline {
-            background-color: white;
-            color: #0066FF;
-            border: 1px solid #0066FF;
-        }
-        .main-cta .btn-outline:hover {
-            background-color: rgba(0, 102, 255, 0.05);
-            transform: translateY(-2px);
-        }
-        /* Custom style for bottom CTA button */
-        .cta {
-            padding: 60px 0;
-            text-align: center;
-            background-color: #f5f9ff;
-        }
-        .cta h2 {
-            margin-bottom: 15px;
-        }
-        .cta p {
-            margin-bottom: 30px;
-        }
-        .cta .btn-primary {
-            display: inline-block;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 6px;
-            background-color: #0066FF;
-            color: white;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
-            transition: all 0.3s ease;
-            min-width: 220px;
-            max-width: 250px;
-        }
-        .cta .btn-primary:hover {
-            background-color: #0055DD;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
         
-        /* Custom hero buttons styling */
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
+        /* Force all code text to be light blue */
+        .code-block pre code,
+        .code-block pre code * {
+            color: #74b9ff !important;
         }
-        .hero-buttons .btn {
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-width: 180px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        
+        /* Remove ALL borders */
+        .code-block,
+        .code-block *,
+        .code-block pre,
+        .code-block code {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
-        .hero-buttons .btn-primary {
-            background-color: #0066FF;
-            color: white;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 102, 255, 0.3);
+        
+        /* Ensure consistent background */
+        .code-block,
+        .code-block pre {
+            background-color: #222 !important;
         }
-        .hero-buttons .btn-primary:hover {
-            background-color: #0055DD;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
-        }
-        .hero-buttons .btn-secondary {
-            background-color: white;
-            color: #0066FF;
-            border: 1px solid #0066FF;
-        }
-        .hero-buttons .btn-secondary:hover {
-            background-color: rgba(0, 102, 255, 0.05);
-            transform: translateY(-2px);
-        }
-        /* Reset workflow circle styles */
-        .step-number {
-            flex-shrink: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 1.25rem;
-            position: relative;
-            top: 6px; /* Fine-tuned positioning */
-        }
-        /* Perfectly align steps */
-        .workflow-step {
-            display: flex;
-            align-items: flex-start; /* Align to top */
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-        }
-        /* Fine-tune h3 alignment with circle */
-        .step-content h3 {
-            margin-top: 14px; /* Align with circle center */
-            margin-bottom: 10px;
-        }
-        /* Adjust the vertical line */
-        .workflow-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 56px; /* Adjust based on circle position */
-            left: 25px;
-            width: 2px;
-            height: calc(100% + 2rem);
-            background-color: var(--mid-gray);
-            z-index: -1;
-        }
-        /* Remove the content padding */
-        .step-content {
-            align-self: flex-start;
-            padding-top: 0;
+        
+        /* Remove any padding that might create border effects */
+        .code-block {
+            padding: 0 !important;
         }
     </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <div class="logo-square"></div>
-                <div class="logo-text">
-                    <h1>XCF</h1>
-                    <span class="logo-tagline">Xcode MCP Server</span>
-                </div>
+                <a href="https://github.com/CodeFreezeAI/xcf/releases" target="_blank">
+                    <span class="logo-text">XCF</span>
+                    <span class="logo-subtext">Xcode MCP Server</span>
+                </a>
+                <a href="https://github.com/codefreezeai/xcf/releases"
+                   aria-label="Download XCF for Xcode automation. Full accessibility support."
+                   aria-hidden="false"
+                   tabindex="0"
+                   style="color: black; font-size: 0.1pt;"
+                   class="sr-only">Download XCF for Xcode automation. Full accessibility support.
+                </a>
             </div>
             <nav>
                 <ul>
                     <li><a href="#features">Features</a></li>
+                    <li><a href="#demo">Demo</a></li>
                     <li><a href="#workflow">Workflow</a></li>
                     <li><a href="#setup">Setup</a></li>
-                    <li><a href="#docs">Documentation</a></li>
-                    <li><a href="https://github.com/codefreezeai/xcf" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="https://github.com/codefreezeai/xcf" target="_blank" class="github-btn">GitHub</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="main-cta">
+    <section class="main-hero fade-in">
         <div class="container">
-            <div class="main-buttons">
-                <a href="#setup" class="main-btn btn-primary">Get Started</a>
-                <a href="#docs" class="main-btn btn-outline">Documentation</a>
-                <a href="https://github.com/codefreezeai/xcf" class="main-btn btn-outline"><i class="fab fa-github"></i> Source Code</a>
+            <div class="hero-logo">
+                <a href="https://github.com/CodeFreezeAI/xcf/releases" target="_blank">
+                    <img src="images/xcf icon.png" alt="XCF Logo" width="128" height="128">
+                </a>
+            </div>
+            <h1>Accelerate Xcode Development with AI</h1>
+            <p class="subtitle">XCF connects your AI assistants to Xcode, providing real-time error reporting, code analysis, and project automation</p>
+        </div>
+    </section>
+
+    <section id="features" class="statement fade-in">
+        <div class="container">
+            <h2>100% Swift Xcode MCP Server</h2>
+            <div class="legal-content">
+                <p><strong>100% Swift! 100% Open:</strong> XCF captures build errors and warnings with precise line numbers and code snippets, giving AI assistants everything they need to fix issues automatically.</p>
+                
+                <p>It is with great excitement that we introduce XCF - a powerful tool designed to bridge the gap between your AI assistants and Xcode. Built with 100% Swift for perfect integration with the Apple development ecosystem.</p>
+                
+                <p>XCF provides seamless AI integration, working with Cursor, VSCode, and Claude Desktop. Simple commands let your AI assistant navigate, build, and run Xcode projects without leaving your chat.</p>
+                
+                <p><strong>Full swift file code analysis without having to build using Xcode is coming soon!</strong></p>
             </div>
         </div>
     </section>
 
-    <section class="hero">
+    <section id="demo" class="demo fade-in">
         <div class="container">
-            <div class="hero-content">
-                <h1>Accelerate Xcode Development <span class="highlight">10x</span> with XCF and AI</h1>
-                <p>XCF connects your AI assistants to Xcode, providing real-time error reporting, code navigation, and project automation.</p>
-                <p><strong>Built with 100% Swift</strong> for perfect integration with the Apple development ecosystem.</p>
-                <div class="hero-buttons">
-                    <a href="#setup" class="btn btn-primary">Get Started</a>
-                    <a href="#docs" class="btn btn-secondary">Documentation</a>
-                    <a href="https://github.com/codefreezeai/xcf" class="btn btn-secondary"><i class="fab fa-github"></i> Source Code</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="images/xcf-in-action.png" alt="XCF Demo">
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Why XCF Makes Xcode Better</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <h3>Intelligent Error Reporting</h3>
-                    <p>XCF captures build errors and warnings with precise line numbers and code snippets, giving AI assistants everything they need to fix issues automatically.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Seamless AI Integration</h3>
-                    <p>Works with Cursor, VSCode, and Claude Desktop. Simple commands let your AI assistant navigate, build, and run Xcode projects without leaving your chat.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Smart Code Navigation</h3>
-                    <p>Just ask for a file by name - XCF intelligently finds it across your project without requiring full paths or complex commands.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Secure Workspace Boundaries</h3>
-                    <p>Built-in security features ensure AI assistants only access files within your defined workspace boundaries.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Build & Run Automation</h3>
-                    <p>Simple commands to build and run your Xcode projects, with detailed feedback on success or failure.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Multi-Project Support</h3>
-                    <p>Easily switch between different Xcode projects with simple commands, perfect for complex development environments.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="download">
-        <div class="container">
-            <h2>Get XCF</h2>
-            <div class="download-options">
-                <div class="download-option">
-                    <div class="download-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h3>Source Code</h3>
-                    <p>Open source and 100% Swift, perfect for the Apple ecosystem.</p>
-                    <a href="https://github.com/codefreezeai/xcf" class="btn btn-secondary">View on GitHub</a>
-                </div>
-                <div class="download-option">
-                    <div class="download-icon">
-                        <i class="fas fa-download"></i>
-                    </div>
-                    <h3>Direct Download</h3>
-                    <p>Get the latest release build for immediate use with your AI assistants.</p>
-                    <a href="https://github.com/codefreezeai/xcf/releases" class="btn btn-primary">Download Latest</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="demo section-dark">
-        <div class="container">
-            <h2 class="text-center text-light margin-bottom-md">See XCF in Action</h2>
-            <p class="text-center text-light margin-bottom-lg">Watch how XCF transforms your development workflow by connecting AI to Xcode.</p>
+            <h2>See XCF in Action</h2>
+            <p>AI-powered Xcode automation in action.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/7KfrsZfQIIg" title="XCF Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <section id="workflow" class="workflow">
+    <section id="workflow" class="accessibility fade-in">
         <div class="container">
             <h2>Streamlined Workflow</h2>
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Connect XCF</h3>
-                        <p>Start with <code>use xcf</code> to activate the tool in your AI assistant.</p>
-                        <div class="code-sample">
-                            <pre><code>use xcf</code></pre>
-                            <div class="response">All xcf systems go!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Explore Projects</h3>
-                        <p>List available Xcode projects and select one to work with.</p>
-                        <div class="code-sample">
-                            <pre><code>show</code></pre>
-                            <div class="response">1. /Users/developer/Projects/MyApp.xcodeproj
-2. /Users/developer/Projects/Library.xcodeproj</div>
-                            <pre><code>open 1</code></pre>
-                            <div class="response">Current project: /Users/developer/Projects/MyApp.xcodeproj</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>View Code</h3>
-                        <p>Use the simple snippet command to view file contents.</p>
-                        <div class="code-sample">
-                            <pre><code>snippet AppDelegate.swift</code></pre>
-                            <div class="response">```swift
-import UIKit
-
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    // App delegate implementation
-}
-```</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Build Project</h3>
-                        <p>Build your project and get detailed error reports with code context.</p>
-                        <div class="code-sample">
-                            <pre><code>build</code></pre>
-                            <div class="response">File:`/Users/developer/Projects/MyApp/ViewController.swift`:34:22 [Error] Value of type 'String' has no member 'toInt'
-
-```swift
-func processValue() {
-    let value = "123"
-    let number = value.toInt() // Error here
-}
-```</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>AI Fixes Issues</h3>
-                        <p>Your AI assistant can now fix issues with precise context.</p>
-                        <div class="ai-response">
-                            <p>The error is occurring because Swift strings don't have a <code>toInt()</code> method. You should use <code>Int(string)</code> instead:</p>
-                            <pre><code>func processValue() {
-    let value = "123"
-    let number = Int(value)  // Fixed: proper Swift int conversion
-}
-</code></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h3>Run Project</h3>
-                        <p>After fixing issues, run your project directly from the chat.</p>
-                        <div class="code-sample">
-                            <pre><code>run</code></pre>
-                            <div class="response">🐦📜 Ran successfully</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="legal-content">
+                <p>XCF was designed to make working with Xcode and AI assistants as smooth as possible. With a simple set of commands, you can unlock powerful automation capabilities that will transform your development process.</p>
+                
+                <p>For developers working on complex projects, XCF provides the perfect bridge between advanced AI capabilities and Apple's development environment, saving countless hours of manual work.</p>
+                
+                <ul class="accessibility-features">
+                    <li><strong>Built with 100% Swift</strong> - Native performance and perfect integration with the Apple ecosystem</li>
+                    <li><strong>Intelligent Error Handling</strong> - Automatically fix warnings and errors with AI assistance</li>
+                    <li><strong>Simple Chat Commands</strong> - Control Xcode projects directly through your AI assistant</li>
+                    <li><strong>Build & Run Automation</strong> - Test your code without leaving your conversation</li>
+                    <li><strong>Multi-Project Support</strong> - Seamlessly work across different Xcode projects</li>
+                </ul>
+                
+                <p>We believe that XCF represents a significant advancement in Xcode developer productivity, especially when working with modern AI assistants.</p>
             </div>
         </div>
     </section>
 
-    <section id="setup" class="setup">
+    <section id="setup" class="legal fade-in">
         <div class="container">
             <h2>Setup Guide</h2>
-            <div class="setup-steps">
-                <div class="setup-step">
-                    <h3>1. Installation</h3>
-                    <div class="installation-container">
-                        <div class="installation-code">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <pre><code>git clone https://github.com/codefreezeai/xcf.git
+            <div class="legal-content">
+                <p><strong>INSTALLATION:</strong> Getting started with XCF is simple. You can install it directly from GitHub releases.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code># Clone the repository
+git clone https://github.com/codefreezeai/xcf.git
 cd xcf
-xcodebuild -project xcf.xcodeproj -scheme xcf -configuration Release</code></pre>
-                            <span class="checkmark">✓</span>
-                        </div>
-                    </div>
+
+# Build the project
+swift build -c release
+
+# Create a symbolic link for easy access
+ln -s "$(pwd)/.build/release/xcf" /usr/local/bin/xcf</code></pre>
                 </div>
-                <div class="setup-step">
-                    <h3>2. Configure Your AI Assistant</h3>
-                    <p>XCF is written in 100% Swift and integrates smoothly with the Apple ecosystem.</p>
-                    
-                    <div class="config-section">
-                        <h4>Cursor</h4>
-                        <p>Edit <code>~/.cursor/mcp.json</code>:</p>
-                        <div class="code-container">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <span class="checkmark">✓</span>
-                            <pre><code>{
+                
+                <p><strong>PERMISSIONS:</strong> Grant XCF the permissions needed to automate Xcode:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code># Grant Xcode automation permissions
+xcf grant</code></pre>
+                </div>
+                
+                <p><strong>FOR CURSOR USERS:</strong> Configure XCF as an MCP server by editing your <code>~/.cursor/mcp.json</code> file:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code>{
   "mcpServers": {
     "xcf": {
       "type": "stdio",
-      "command": "/path/to/xcf"
+      "command": "/Applications/xcf.app/Contents/MacOS/xcf"
     }
   }
 }</code></pre>
-                        </div>
-                    </div>
-                    
-                    <div class="config-section-alt">
-                        <h4>Claude Desktop</h4>
-                        <p>Edit <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</p>
-                        <div class="code-container">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <span class="checkmark">✓</span>
-                            <pre><code>{
+                </div>
+                
+                <p><strong>FOR CLAUDE DESKTOP USERS:</strong> Add XCF to your <code>claude_desktop_config.json</code> file:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code>{
   "mcpServers": {
     "xcf": {
       "type": "stdio",
-      "command": "/path/to/xcf",
-      "args": [],
+      "command": "/Applications/xcf.app/Contents/MacOS/xcf",
       "env": {
-        "XCODE_PROJECT_FOLDER": "/path/to/project/",
-        "XCODE_PROJECT": "/path/to/project/project.xcodeproj"
+          "XCODE_PROJECT_FOLDER_optional": "/path/to/project/",
+          "XCODE_PROJECT_optional": "/path/to/project/project.xcodeproj"
       }
     }
   }
 }</code></pre>
-                        </div>
-                    </div>
                 </div>
-                <div class="setup-step">
-                    <h3>3. Restart Your AI Assistant</h3>
-                    <p>Close and reopen your AI assistant application to apply the changes.</p>
+                
+                <p><strong>RESTART YOUR AI ASSISTANT:</strong> After configuration, restart your AI assistant application to apply the changes and begin using XCF's powerful features.</p>
+                
+                <p><strong>TROUBLESHOOTING:</strong> If you encounter any issues with XCF, try these steps:</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code># 1. Quit your AI assistant
+# 2. Open Terminal
+# 3. Kill any running XCF processes `killall xcf`
+# 4. Reopen your AI assistant
+# 5. From AI: Activate XCF `use xcf`</code></pre>
                 </div>
-                <div class="setup-step">
-                    <h3>4. Grant Permissions</h3>
-                    <p>Use the command <code>xcf grant</code> to grant Xcode automation permissions.</p>
+                
+                <p><strong>PRECISE PROJECT SELECTION:</strong> XCF allows you to select specific Xcode projects through simple commands (projects must be within your designated workspace folder for security):</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre><code># List all available Xcode projects
+xcf list
+
+# Set the active project
+xcf open #
+
+# Run the active project
+xcf run</code></pre>
+                </div>
+                
+                <p><strong>SECURITY CONSIDERATIONS:</strong> XCF is designed with security in mind, providing workspace protection that safely works with projects in your designated workspace and boundary enforcement that automatically prevents access outside those boundaries.</p>
+                
+                <p>The complete installation guide and documentation are available in our GitHub repository, providing detailed instructions for every step of the setup process.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta fade-in">
+        <div class="container">
+            <h2>XCF Source Code</h2>
+            <p>The complete source code for XCF is available on GitHub. Built with 100% Swift for perfect integration with the Apple ecosystem.</p>
+            <a href="https://github.com/codefreezeai/xcf" target="_blank" class="btn">View on GitHub</a>
+        </div>
+    </section>
+
+    <section class="command-reference fade-in">
+        <div class="container">
+            <h2>XCF Command Reference</h2>
+            <p class="subtitle">Explore the powerful commands available in XCF to enhance your Xcode development workflow</p>
+            
+            <div class="legal-content">
+                <h3>Core Commands</h3>
+                <ul class="accessibility-features">
+                    <li><strong>use xcf</strong> - Activate XCF mode to connect AI assistants to Xcode</li>
+                    <li><strong>xcf grant</strong> - Grant necessary permissions for Xcode automation</li>
+                    <li><strong>xcf show</strong> - List all available Xcode projects and workspaces</li>
+                    <li><strong>xcf open #</strong> - Select a specific Xcode project by number</li>
+                </ul>
+                
+                <h3>Project Commands</h3>
+                <ul class="accessibility-features">
+                    <li><strong>xcf build</strong> - Build the currently selected Xcode project</li>
+                    <li><strong>xcf run</strong> - Execute the currently selected Xcode project</li>
+                    <li><strong>xcf current</strong> - Display information about the currently selected project</li>
+                    <li><strong>xcf env</strong> - Show all environment variables for the current context</li>
+                </ul>
+                
+                <h3>Workflow Examples</h3>
+                <div class="workflow-example">
+                    <h4>Basic Development Workflow</h4>
+                    <ol>
+                        <li><code>use xcf</code> - Activate the XCF tool</li>
+                        <li><code>show</code> - See all available Xcode projects</li>
+                        <li><code>open #</code> - Select a specific project by number</li>
+                        <li><code>build</code> - Build the selected project</li>
+                        <li><code>run</code> - Run the project in the simulator</li>
+                    </ol>
+                </div>
+                
+                <div class="workflow-example">
+                    <h4>Code Exploration</h4>
+                    <ol>
+                        <li><code>current</code> - Check which project is currently selected</li>
+                        <li><code>snippet</code> tool to examine code</li>
+                        <li><code>build</code> - Test your changes</li>
+                    </ol>
+                </div>
+                
+                <h3>Additional Tools</h3>
+                <ul class="accessibility-features">
+                    <li><strong>snippet</strong> - Extract code snippets from files in the current project</li>
+                    <li><strong>list</strong> - Show all available tools in the XCF server</li>
+                    <li><strong>help</strong> - Display help information about XCF actions and usage</li>
+                    <li><strong>analyze</strong> - Full Swift code file analysis is coming soon</li>
+                </ul>
+                
+                <div class="note">
+                    <p>Note: You can access these commands after activating XCF with <code>use xcf</code>. After activation, you can use short commands like <code>build</code> instead of <code>xcf build</code>.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="docs" class="documentation">
+    <section class="accessibility-note fade-in">
         <div class="container">
-            <h2>Documentation</h2>
-            <div class="docs-content">
-                <div class="docs-sidebar">
-                    <ul>
-                        <li><a href="#commands">Commands</a></li>
-                        <li><a href="#functions">Function Calls</a></li>
-                        <li><a href="#snippets">Using Snippets</a></li>
-                        <li><a href="#security">Security Features</a></li>
-                        <li><a href="#advanced">Advanced Configuration</a></li>
-                        <li><a href="#troubleshooting">Troubleshooting</a></li>
-                    </ul>
-                </div>
-                <div class="docs-main">
-                    <div id="commands" class="docs-section">
-                        <h3>Commands</h3>
-                        <table class="commands-table">
-                            <thead>
-                                <tr>
-                                    <th>Command</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>use xcf</code></td>
-                                    <td>Activate xcf mode</td>
-                                </tr>
-                                <tr>
-                                    <td><code>show</code></td>
-                                    <td>List open Xcode projects</td>
-                                </tr>
-                                <tr>
-                                    <td><code>open #</code></td>
-                                    <td>Select project by number</td>
-                                </tr>
-                                <tr>
-                                    <td><code>run</code></td>
-                                    <td>Run current project</td>
-                                </tr>
-                                <tr>
-                                    <td><code>build</code></td>
-                                    <td>Build current project</td>
-                                </tr>
-                                <tr>
-                                    <td><code>current</code></td>
-                                    <td>Show selected project</td>
-                                </tr>
-                                <tr>
-                                    <td><code>env</code></td>
-                                    <td>Show environment variables</td>
-                                </tr>
-                                <tr>
-                                    <td><code>help</code></td>
-                                    <td>Display all available commands</td>
-                                </tr>
-                                <tr>
-                                    <td><code>grant</code></td>
-                                    <td>Grant permission to use Xcode automation</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="functions" class="docs-section">
-                        <h3>Function Calls</h3>
-                        <p>For programmatic access, XCF provides these MCP tools:</p>
-                        <ul>
-                            <li><code>mcp_xcf_xcf</code>: Execute xcf actions/commands</li>
-                            <li><code>mcp_xcf_list</code>: Show all available tools</li>
-                            <li><code>mcp_xcf_snippet</code>: Access file contents</li>
-                            <li><code>mcp_xcf_help</code>: Get help information</li>
-                        </ul>
-                    </div>
-                    <div id="snippets" class="docs-section">
-                        <h3>Using Snippets</h3>
-                        <p>XCF's snippet tool makes code viewing simple:</p>
-                        
-                        <h4>Human Commands</h4>
-                        <div class="code-container">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <span class="checkmark">✓</span>
-                            <pre><code># View entire file with just filename
-snippet AppDelegate.swift
-
-# View specific lines (if needed)
-snippet AppDelegate.swift 10 20</code></pre>
-                        </div>
-                        
-                        <h4>Function Calls</h4>
-                        <div class="code-container">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <span class="checkmark">✓</span>
-                            <pre><code># Get entire file
-mcp_xcf_snippet(filePath="AppDelegate.swift", entireFile=true)
-
-# Get specific lines
-mcp_xcf_snippet(filePath="AppDelegate.swift", startLine=10, endLine=20)</code></pre>
-                        </div>
-                    </div>
-                    
-                    <div id="security" class="docs-section">
-                        <h3>Security Features</h3>
-                        <div>
-                            <p class="marketing-text margin-bottom-md">XCF is designed with security in mind, providing:</p>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Workspace protection</span>
-                                <span>Safely works with projects in your designated workspace</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Boundary enforcement</span>
-                                <span>Automatically prevents access outside your workspace boundaries</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Safe alternatives</span>
-                                <span>Redirects to secure options when needed</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Environment controls</span>
-                                <span>Uses environment variables to define secure boundaries</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="advanced" class="docs-section">
-                        <h3>Advanced Configuration</h3>
-                        <p>For non-Cursor clients or users who want more project-level control, you can add these optional environment variables:</p>
-                        <div class="code-container">
-                            <button class="copy-btn" onclick="copyToClipboard(this.parentNode.querySelector('code').textContent, this.parentNode)">Copy</button>
-                            <span class="checkmark">✓</span>
-                            <pre><code>{
-  "mcpServers": {
-    "xcf": {
-      "type": "stdio",
-      "command": "/path/to/xcf",
-      "args": [],
-      "env": {
-        "XCODE_PROJECT_FOLDER": "/path/to/project/",
-        "XCODE_PROJECT": "/path/to/project/project.xcodeproj"
-      }
-    }
-  }
-}</code></pre>
-                        </div>
-                        <p class="margin-top-sm">These environment variables let you:</p>
-                        <div>
-                            <div class="security-item">
-                                <span class="marketing-heading">Project selection</span>
-                                <span>Pre-select a specific Xcode project to work with</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Security boundaries</span>
-                                <span>Define a custom workspace boundary for security</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="troubleshooting" class="docs-section">
-                        <h3>Troubleshooting</h3>
-                        <div>
-                            <p class="marketing-text margin-bottom-md">If you're having issues with XCF, check these common solutions:</p>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Verify installation</span>
-                                <span>Make sure XCF is correctly installed</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Check configuration</span>
-                                <span>Confirm your settings are valid in the configuration file</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Permission issues</span>
-                                <span>Ensure permissions are properly set for Xcode access</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Environment variables</span>
-                                <span>Use the <code>env</code> command to verify your environment setup</span>
-                            </div>
-                            
-                            <div class="security-item">
-                                <span class="marketing-heading">Restart your assistant</span>
-                                <span>Sometimes a simple restart will resolve connection issues</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- More documentation sections would go here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2>What Developers Are Saying</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"XCF has completely transformed how I work with Xcode. The error reporting alone saves me hours of debugging time every week."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&h=250&q=80&crop=faces&bg=white" alt="Developer" style="filter: grayscale(100%);">
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>iOS Developer, TechStart</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"The simplicity of the snippet tool is genius. Just type the filename and you're good to go. It's these small things that make a huge difference in workflow."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&h=250&q=80&crop=faces&bg=white" alt="Developer" style="filter: grayscale(100%);">
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Senior Developer, AppWorks</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"My AI assistant can now fix complex Swift errors without me having to explain every detail. XCF provides all the context it needs automatically."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&h=250&q=80&crop=faces&bg=white" alt="Developer" style="filter: grayscale(100%);">
-                        <div class="author-info">
-                            <h4>Alex Rodriguez</h4>
-                            <p>Lead iOS Developer, TechGiant</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to 10x Your Xcode Development?</h2>
-            <p>Join thousands of developers using XCF to accelerate their workflow.</p>
-            <a href="#setup" class="btn btn-primary">Get Started Now</a>
+            <h2>Developer Productivity</h2>
+            <p>XCF transforms how developers interact with Xcode through AI assistants, creating a powerful bridge between advanced language models and Apple's development environment.</p>
+            <p>By providing detailed context for errors, simplified navigation, and direct manipulation capabilities, XCF removes many of the traditional friction points in Xcode development workflows.</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-square"></div>
-                    <div class="logo-text">
-                        <h3>XCode MCP Server</h3>
-                        <p>XCodeFreeze Automation</p>
-                        <p>by xcf.ai</p>
-                    </div>
-                </div>
-                <div class="footer-sections">
-                    <div class="footer-section">
-                        <h4>Product</h4>
-                        <ul>
-                            <li><a href="#features">Features</a></li>
-                            <li><a href="#docs">Documentation</a></li>
-                            <li><a href="#workflow">Workflow</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#source">Source Code</a></li>
-                            <li><a href="#download">Download</a></li>
-                            <li><a href="#commands">Commands</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#license">License (MIT)</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Support</h4>
-                        <ul>
-                            <li><a href="#help">Help Center</a></li>
-                            <li><a href="#issues">Report Issues</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="social-links">
-                    <a href="https://twitter.com/superbox64"><i class="fab fa-twitter"></i></a>
-                    <a href="https://github.com/codefreezeai/xcf"><i class="fab fa-github"></i></a>
-                </div>
-                <p>&copy; 2025 XCF.ai</p>
-            </div>
+            <p>&copy; 2025 XCF.ai. All rights reserved.</p>
+            <p>XCF is 100% swift open-source Xcode MPC Server designed to integrate with Cursor, Claude, VSCode and Windsurf.</p>
+            <p>Xcode MCP Server by XCodeFreeze Automation</p>
+            <p class="footer-links"><a href="https://github.com/CodeFreezeAI/xcf/releases" target="_blank">GitHub Releases</a></p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script>
-    function copyToClipboard(text, container) {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-                // Handle different container structures
-                const checkmark = container.querySelector('.checkmark');
-                const copyBtn = container.querySelector('button');
-                
-                if (checkmark && copyBtn) {
-                    // Show checkmark
-                    checkmark.style.display = 'inline';
-                    copyBtn.style.display = 'none';
-                    
-                    // Reset after 2 seconds
-                    setTimeout(() => {
-                        checkmark.style.display = 'none';
-                        copyBtn.style.display = 'block';
-                    }, 2000);
-                } else {
-                    // Fallback for older structure
-                    container.classList.add('copied');
-                    setTimeout(() => {
-                        container.classList.remove('copied');
-                    }, 2000);
-                }
-            })
-            .catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-    }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
