@@ -199,7 +199,7 @@ xcf grant</code></pre>
                 </div>
                 
                 <h3>Environment Variables</h3>
-                <p>Add XCF to your <code>claude_desktop_config.json</code> file with optional environment variables:</p>
+                <p>Add XCF to your <code>claude_desktop_config.json</code> file with extra environment variables:</p>
                 
                 <div class="code-block">
                     <button class="copy-btn">Copy</button>
@@ -209,8 +209,8 @@ xcf grant</code></pre>
       "type": "stdio",
       "command": "/Applications/xcf.app/Contents/MacOS/xcf server",
       "env": {
-          "XCODE_PROJECT_FOLDER_optional": "/path/to/project/",
-          "XCODE_PROJECT_optional": "/path/to/project/project.xcodeproj"
+          "XCODE_PROJECT_FOLDER": "/path/to/project/",
+          "XCODE_PROJECT": "/path/to/project/project.xcodeproj"
       }
     }
   }
