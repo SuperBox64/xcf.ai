@@ -56,6 +56,60 @@
         .code-block {
             padding: 0 !important;
         }
+        
+        /* Image hover effects */
+        .xcf-in-action {
+            position: relative;
+            padding: 5px 0 30px;
+            overflow: visible;
+        }
+        
+        .xcf-in-action .container {
+            overflow: visible;
+        }
+        
+        .xcf-in-action img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .xcf-in-action img:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .xcf-in-action h2 {
+            transition: opacity 0.3s ease;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        
+        /* Remove blue underline in this section */
+        .xcf-in-action h2::after {
+            display: none !important;
+        }
+        
+        .xcf-in-action .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 94%;
+            margin: 0 auto;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+            padding-bottom: 20px;
+        }
+        
+        .xcf-in-action .image-container:hover {
+            cursor: pointer;
+            transform: scale(1.215);
+            transition: transform 0.3s ease;
+        }
+        
+        .xcf-in-action.hover-active h2 {
+            opacity: 0;
+        }
     </style>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -359,6 +413,17 @@ snippet /full/path/to/file.swift 10 20</code></pre>
         </div>
     </section>
 
+    <section class="xcf-in-action fade-in">
+        <div class="container">
+            <center>
+                <h2>XCF in action with Cursor</h2>
+                <div class="image-container">
+                    <img src="images/xcf-in-action-cursor.png" alt="XCF in action with Cursor" class="full-width-image">
+                </div>
+            </center>
+        </div>
+    </section>
+
     <section class="accessibility-note fade-in">
         <div class="container">
             <h2>Developer Productivity</h2>
@@ -397,6 +462,20 @@ snippet /full/path/to/file.swift 10 20</code></pre>
                     nav.classList.remove('active');
                 });
             });
+            
+            // Image hover effect to hide heading
+            const imageContainer = document.querySelector('.xcf-in-action .image-container');
+            const xcfSection = document.querySelector('.xcf-in-action');
+            
+            if (imageContainer && xcfSection) {
+                imageContainer.addEventListener('mouseenter', function() {
+                    xcfSection.classList.add('hover-active');
+                });
+                
+                imageContainer.addEventListener('mouseleave', function() {
+                    xcfSection.classList.remove('hover-active');
+                });
+            }
         });
     </script>
 </body>
