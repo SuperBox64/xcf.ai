@@ -204,6 +204,26 @@ nav ul li a:hover {
     color: white;
 }
 
+/* Navigation Sponsor Banner */
+.nav-sponsor {
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px 0 0;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-sponsor a {
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-sponsor a:hover {
+    color: #74b9ff;
+}
+
 /* Hero Section Base Styles */
 .hero, .main-hero, .command-reference {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)), url('../images/hero-bg.jpg');
@@ -779,7 +799,13 @@ footer p {
         width: 100%;
         text-align: center;
     }
-    
+
+    .nav-sponsor {
+        padding: 12px 20px;
+        margin-top: 15px;
+        font-size: 0.75rem;
+    }
+
     /* Active menu button styles with rainbow effect */
     .mobile-menu-btn.active span:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
